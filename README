@@ -17,11 +17,14 @@ VMC Procedure:
 2. Set density as a value between 0 and 1: This sets the number of elements of the C matrix that are available to the VMC algorithm. 1-density: data that must be completed
 3. Set ntrials to desired value. Since elements in C are masked at random, you need >1 trial (paper uses 100 trials/reaction)
 4. Adjust parameters in the VMCoptions() class call
-   Do not change `d=2' as this corresponds to the power of the polynomial
+   Do not change 'd=2' as this corresponds to the power of the polynomial
 5. Run the file
 6. The file generates an output .pkl file, which can be analyzed with 'AnalyzeResults.py' 
 7. Set this output filename as the filename in AnalyzeResults.py 
 8. Set the filename_true to the original .pkl file from step 1
 8. Set temperature for transmission coefficient calculations and set mirroring to true if half of a symmetric MEP is being used
 9. Run AnalyzeResults.py to plot model performance
+   Set calc_ZCT = True, for activating transmission coefficient calculations based on zero-curvature tunneling
+   Set mirror = True, if half of the MEP is used in C matrix (i.e.,SN2 type reactions)
+   Set use_trueVAGandE0 = False, to use integral limits EO and VAG of each trial instead of the DFT-calculated (true) values in ZCT calculatiobs
 
