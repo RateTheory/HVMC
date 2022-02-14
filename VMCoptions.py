@@ -126,7 +126,7 @@ def generate_col_combo_mask(combo,Xtrue):
 ##VMC
 
 pathtag = 'All' #tags - R: reactant; P: product; T: TS; All: everything; Rhalf; Phalf
-filename = 'Sn2Ar1_dft2svp_step100_disp5000_num100.pkl'
+filename = 'Systems/Sn2Ar1_dft2svp_step100_disp5000_num100.pkl'
 df = pd.read_pickle(filename)
 
 # Determine if ordered, then parse
