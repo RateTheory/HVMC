@@ -6,41 +6,26 @@ Calculates tunneling
 @author: selinbac
 """
 
-def zct(T_list,index,evals,Vmep,s_list,s,E0,VAG,SAG):
-    #import pandas as pd
-    #import matplotlib.pyplot as plt
+def zct(T_list,evals,Vmep,s,E0,VAG,SAG):
     import numpy as np
     from spline import VadiSpline
-    #from scipy.interpolate import UnivariateSpline
     
     #CONSTANTS
-    
     h = 6.62617353e-34
     c = 2.99792458e10
     Na = 6.02204531e23
     kcaltokJ = 4.184
     kb = 1.3806244e-23
     htokcal = 627.5096  #for kcal/mol
-    #T_list=[200] #K
     Jtoh=4.359197907585004e-18
     ratio=9.10938356E-031/1.66053904E-027
     EPS_MEPE = 1e-8
-    
-    #filename = 'CF3CH3_dft2svp_step50_disp5000_num100.pkl' 
-    #alldf = pd.read_pickle(filename)
-    #Vmep=alldf['Energy'] 
-    
-    '''
-    s=alldf['s']
-    s_list=[]
-    for i in s.index:
-        s_list.append(s[i])
-    '''
-    #evals=alldf['Eigenvalues']
-    
     mu=1/ratio  
     F=len(evals[evals.index[-1]])
     V_aG=[]
+    
+    s_list=np.array(s)
+    index=s.index
     
     def prob(E, VAG, E0, SAG):
         
@@ -49,14 +34,11 @@ def zct(T_list,index,evals,Vmep,s_list,s,E0,VAG,SAG):
             print('issues with E0!!!')
         elif E0<=E<=VAG:
             pE=1/(1+np.exp(2*get_theta(E,s_list,mu,VadiSpl,SAG,VAG)))
-            #print(E*htokcal,'p:',pE)
         elif 2*VAG-E0<E:
             pE=1
             print('issues with upper limit!!')
         else:
             pE=1-prob(2*VAG-E, VAG, E0, SAG)
-            #if 2*VAG-E<=VAG and 2*VAG-E>=E0:
-                #pE=1-(1/(1+np.exp(2*get_theta(2*VAG-E,s_list,mu,VadiSpl,SAG,VAG))))
         return pE
     
     def kappa_integrand(E,VAG,E0,SAG,beta):
@@ -115,8 +97,6 @@ def zct(T_list,index,evals,Vmep,s_list,s,E0,VAG,SAG):
             theta += intg_trap(theta_integrand, si, sj, n=160, args=args)
         return theta
 
-    
-    
     def au_to_wvno(eigval): 
         #converts from atomic units to wavenumbers
         tocm = 5.89141e-7
@@ -129,15 +109,12 @@ def zct(T_list,index,evals,Vmep,s_list,s,E0,VAG,SAG):
     summ=[]
     for i in index:
         harmonic_sum=0
-        
+        ref=np.array(Vmep)[0]
         for j in range(F):
-            #if j==0:
-            #    continue
             harmonic_sum+=0.5*h*c*Na/(1e3*kcaltokJ)*au_to_wvno(evals[i][j])
           
         summ.append(harmonic_sum)
-        V_aG.append((Vmep[i]+harmonic_sum/htokcal)-min(Vmep))
-        #V_aG.append((Vmep[i]-Vmep[alldf.index[0]])*htokcal+harmonic_sum)
+        V_aG.append((Vmep[i]+harmonic_sum/htokcal)-(ref))
     
     
     if VAG=='calc':
@@ -145,40 +122,16 @@ def zct(T_list,index,evals,Vmep,s_list,s,E0,VAG,SAG):
     if SAG=='calc':
         SAG=s_list[V_aG.index(VAG)]
     if E0=='calc':
-        E0=min(V_aG[0],V_aG[-1]) 
-    #if E0!=V_aG[-1] and E0!=V_aG[0]:
-        #print('check E0 value')
+        if V_aG[-1]-V_aG[0]<0:
+            E0=V_aG[0]
+        else:
+            E0=V_aG[-1]
     limit=2*VAG-E0
     
-    #interpol=UnivariateSpline(s,V_aG,k=3,ext=3,s=0)
-    VadiSpl=VadiSpline(s, V_aG)
+    VadiSpl=VadiSpline(s,V_aG)
     E1=np.linspace(E0,(limit-E0)*0.1+E0,25)
     E2=np.geomspace((limit-E0)*0.1+E0,limit,25)
     E=np.concatenate([E1,E2])    
-    
-    '''
-    plt.scatter(s,(Vmep-min(Vmep)),label='$V_{MEP}$')
-    #plt.scatter(s,summ,label='ZPE')
-    plt.scatter(s,V_aG,label='$V_{a}^{G}$')
-    plt.legend(loc=5)
-    '''
-
-    '''
-    y=[]
-    yy=[]  
-    for i in range(len(E)):
-        beta=1.0 / (kb*T_list[0]/Jtoh) 
-        yy.append(np.exp(-beta*E[i])*prob(E[i],VAG,E0, SAG))
-        y.append(np.exp(-beta*E[i]))
-        #y.append(prob(E[i],VAG,E0, SAG))
-    y=np.array(y)
-    plt.figure(0)
-    plt.scatter(E,y,label='$exp(- \\beta E)$')
-    plt.legend(loc=1)
-    plt.figure(1)
-    plt.scatter(E,yy,label='integrand\np(E)$e^{-\\beta E}$')
-    plt.legend(loc=1)
-    '''
     kappa_list=[]
     
     for i in range(len(T_list)):
@@ -187,4 +140,4 @@ def zct(T_list,index,evals,Vmep,s_list,s,E0,VAG,SAG):
         kappa1=beta*kappa_integral(E, s_list, mu, VadiSpl, SAG, VAG, E0, beta,limit)/np.exp(-beta*VAG)
         kappa2=np.exp(-beta*(VAG-E0))
         kappa_list.append(kappa1+kappa2)
-    return kappa1+kappa2,min(V_aG[0],V_aG[-1]),max(V_aG),s_list[V_aG.index(max(V_aG))]
+    return kappa1+kappa2,max(V_aG[0],V_aG[-1]),max(V_aG),s_list[V_aG.index(max(V_aG))],V_aG
