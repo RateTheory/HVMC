@@ -8,7 +8,7 @@ AnalyzeResults.py - postprocessing VMC output
 calcFreeEnergy.py - supporting file to compute zero-point energy and vibrational free energy contributions
 ZCT.py - supporting file to compute transmission coefficient based on zero-curvature tunneling
 spline.py - supporting file for transmission coefficient calculation
-ResultsPKL\ and ResultsZCT\ and Figures\ - folders where the output files are saved
+ResultsPKL\ and ResultsZCT\ and Figures\ - folders where the output files are saved - please create these folders prior to VMC calculation at the same-level as Systems\
 
 
 VMC Procedure:
