@@ -27,7 +27,13 @@ font = {'family' : 'sans-serif',
 
 matplotlib.rc('font', **font)
 
-
+if not os.path.exists('ResultsPKL') :
+    os.makedirs('ResultsPKL') 
+if not os.path.exists('ResultsZCT') :
+    os.makedirs('ResultsZCT') 
+if not os.path.exists('Figures') :
+    os.makedirs('Figures') 
+   
 class VMCoptions: 
     
     def __init__(self,d=2,c=1.,epsilon=0,niter=5000,gamma0=0,
@@ -126,8 +132,25 @@ def generate_col_combo_mask(combo,Xtrue):
 ##VMC
 
 pathtag = 'All' #tags - R: reactant; P: product; T: TS; All: everything; Rhalf; Phalf
-filename = 'Systems/Sn2Ar1_dft2svp_step100_disp5000_num100.pkl'
-df = pd.read_pickle(filename)
+
+#SN2 type 
+filename = 'Sn2C1_dft2svp_step100_disp5000_num100.pkl'
+#filename = 'Sn2C3_dft2svp_step100_disp5000_num100.pkl'
+#filename = 'Sn2Ar1_dft2svp_step100_disp5000_num100.pkl'
+#filename = 'Sn2Ar2_dft2svp_step100_disp5000_num100.pkl'
+#filename = 'Sn2Ar3_dft2svp_step100_disp5000_num100.pkl'
+#filename = 'Sn2Ar4_dft2svp_step100_disp5000_num100.pkl'
+#filename = 'Sn2Ar5_dft2svp_step100_disp5000_num100.pkl'
+#filename = 'Sn2Ar6_dft2svp_step100_disp5000_num100.pkl'
+
+#non-SN2 type
+#filename = 'CF3CH3_dft2svp_step50_disp5000_num100.pkl'
+#filename = 'CH4_dft2svp_step50_disp5000_num100.pkl'
+#filename = 'C2H6_dft2svp_step50_disp5000_num100.pkl'
+#filename  ='Ir_dft2svp_step50_disp5000_num100.pkl'
+#filename = 'MADH-od2_dft2svp_step50_disp5000-extend-odd_num100.pkl'
+
+df = pd.read_pickle('Systems/'+filename)
 
 # Determine if ordered, then parse
 if 'ordered' in filename:
@@ -199,7 +222,7 @@ if Xtrue.shape[0]>Xtrue.shape[1]:
 
 ##### SETTINGS PT2
 
-density = 0.05  #Only applies for any variant of element sampling 
+density = 0.2  #Only applies for any variant of element sampling 
 ntrials = 100
 trial = 0 #Starting trial index. Leave at 0.
 priority = False#slightly non-random sampling where TS modes are sampled more

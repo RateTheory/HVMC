@@ -19,29 +19,27 @@ from matplotlib.lines import Line2D
 from scipy.io import loadmat
 import ZCT
 
-filename_true = 'CF3CH3_dft2svp_step50_disp5000_num100.pkl'
-#filename_true = 'CH4_dft2svp_step50_disp5000_num100_reversed.pkl'
-#filename_true = 'C2H6_dft2svp_step50_disp5000_num100_reversed.pkl'
-#filename_true = 'Ir_dft2svp_step50_disp5000_num100_reversed.pkl'
-#filename_true = 'MADH-od2_dft2svp_step50_disp5000-extend-odd_num100_reversed.pkl'
-#filename_true = 'Sn2C1_dft2svp_step100_disp5000_num100.pkl'
+#SN2 type 
+filename_true = 'Sn2C1_dft2svp_step100_disp5000_num100.pkl'
+#filename_true = 'Sn2C3_dft2svp_step100_disp5000_num100.pkl'
 #filename_true = 'Sn2Ar1_dft2svp_step100_disp5000_num100.pkl'
+#filename_true = 'Sn2Ar2_dft2svp_step100_disp5000_num100.pkl'
+#filename_true = 'Sn2Ar3_dft2svp_step100_disp5000_num100.pkl'
+#filename_true = 'Sn2Ar4_dft2svp_step100_disp5000_num100.pkl'
 #filename_true = 'Sn2Ar5_dft2svp_step100_disp5000_num100.pkl'
 #filename_true = 'Sn2Ar6_dft2svp_step100_disp5000_num100.pkl'
 
-filename = 'resultsT_All_ntrials100_CF3CH3_dft2svp_step50_disp5000_num100_samptypeGuaranteeAllRows_density0.6.pkl' 
-#filename = 'resultsT_All_ntrials100_CH4_dft2svp_step50_disp5000_num100_samptypeGuaranteeAllRows_density0.35.pkl'
-#filename = 'resultsT_All_ntrials100_C2H6_dft2svp_step50_disp5000_num100_samptypeGuaranteeAllRows_density0.3.pkl'
-#filename = 'resultsT_All_ntrials100_Ir_dft2svp_step50_disp5000_num100_samptypeGuaranteeAllRows_density0.5.pkl'
-#filename = 'resultsT_All_ntrials100_MADH-od2_dft2svp_step50_disp5000-exten-o_num100_samptypeGuaranteeAllRows_density0.1.pkl'
-#filename = 'resultsT_All_ntrials100_Sn2C1_dft2svp_step100_disp5000_num100_samptypeGuaranteeAllRows_density0.2.pkl'
-#filename = 'resultsT_All_ntrials100_Sn2Ar1_dft2svp_step100_disp5000_num100_samptypeGuaranteeAllRows_density0.05.pkl'
-#filename = 'resultsT_All_ntrials100_Sn2Ar5_dft2svp_step100_disp5000_num100_samptypeGuaranteeAllRows_density0.045.pkl'
-#filename = 'resultsT_All_ntrials100_Sn2Ar6_dft2svp_step100_disp5000_num100_samptypeGuaranteeAllRows_density0.045.pkl'
+#non-SN2 type
+#filename_true = 'CF3CH3_dft2svp_step50_disp5000_num100.pkl'
+#filename_true = 'CH4_dft2svp_step50_disp5000_num100.pkl'
+#filename_true = 'C2H6_dft2svp_step50_disp5000_num100.pkl'
+#filename_true  ='Ir_dft2svp_step50_disp5000_num100.pkl'
+#filename_true = 'MADH-od2_dft2svp_step50_disp5000-extend-odd_num100.pkl' 
 
+filename='resultsT_All_ntrials100_Sn2C1_dft2svp_step100_disp5000_num100_samptypeGuaranteeAllRows_density0.2.pkl'
 
 print(filename)
-alldf_true = pd.read_pickle(filename_true)
+alldf_true = pd.read_pickle('Systems/'+filename_true)
 
 T_tunnel=[300]
 calc_ZCT = False #True activates tunneling calculations
