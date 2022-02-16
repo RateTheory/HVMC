@@ -33,3 +33,12 @@ VMC Procedure:
    Set mirror = True, if half of the MEP is used in C matrix (i.e.,SN2 type reactions). Line 46
    Set use_trueVAGandE0 = False, to use integral limits EO and VAG of each trial instead of the DFT-calculated (true) values in ZCT calculations. Line 47
 
+
+Package Requirements:
+- Numpy
+- Scipy
+- Matplotlib
+- Pandas
+- Seaborn
+- Math
+- Imageio
