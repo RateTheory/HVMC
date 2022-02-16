@@ -1,1 +1,5 @@
 This folder contains sample output files for all non-SN2 and representative SN2 (C1, Ar1, Ar5, and Ar6) type reactions. 
+
+ResultsPKL/ contains the outputs of VMCoptions.py
+
+ResultsZCT/ contains the outputs of AnalyzeResults.py
