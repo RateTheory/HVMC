@@ -57,6 +57,7 @@ if calc_ZCT:
         df_copy=df_copy.sort_index(ascending=True)
         alldf_true=df_copy.append(alldf_true)
     
+    s=alldf_true['s']
     evals=alldf_true['Eigenvalues']
     Vmep=alldf_true['Energy'] 
     
