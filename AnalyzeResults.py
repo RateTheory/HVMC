@@ -570,117 +570,118 @@ if calc_ZCT:
 
 
 ###########################################################################
-
-
-s_values=np.array(s)
-
-#1000 K
-G_1000K=np.array(alldf['G, VMC, 1000K'])
-G_1000K_true=G_true[-1]
-deltaG_1000K=[]
-deltaG_1000K_true=G_1000K_true-G_1000K_true[0]
-fig, ax = plt.subplots(figsize=(8,12),dpi=200)
-
-for i in range(ntrials):
-    deltaG_1000K.append(G_1000K[i]-G_1000K[i][0])
-    #ax.plot(s_values,G_1000K[i],linestyle='solid',lw=1.35)
-    ax.plot(s_values,G_1000K[i]-G_1000K[i][0],linestyle='solid',lw=1.35)
-    if i==0:
-        #ax.legend(fontsize=20)
-        ax.set_xlabel('s',fontsize=25)
-        plt.xticks(fontsize=20)
-        plt.yticks(fontsize=20)
-        ax.set_ylabel('$\Delta G_{vib,1000K}$ (kcal/mol)',fontsize=25)
-        #ax.set_title('C2H6_C6H5_noproj'+filename.split('_')[3])
-        #ax.grid()
-        
-
-#ax.set_xlim([-0.5,0.5]) 
-#ax.set_ylim([-2.5,10]) 
-ax.plot(s_values,G_1000K_true-G_1000K_true[0],linestyle='solid',color='black',lw=3)
-#ax.plot(s_values,G_1000K_true,linestyle='solid',color='black',lw=3)
-ax.fill_between(s_values,G_1000K_true-G_1000K_true[0]-accuracy,G_1000K_true-G_1000K_true[0]+accuracy,color='grey',alpha=0.2)
-s_truedeltaG_max=s_values[(np.where(deltaG_1000K_true==max(deltaG_1000K_true)))[0][0]]
-s_deltaG_max=[]
-count_s_deltaG=0
-for i in range(ntrials):
-    s_max_trial=s_values[(np.where(deltaG_1000K[i]==max(deltaG_1000K[i])))[0][0]]
-    s_deltaG_max.append(s_max_trial)
-    if  s_max_trial==s_truedeltaG_max:
-        continue
-    count_s_deltaG+=1
-print('Percentage of trials that have the same deltaG peak:',(ntrials-count_s_deltaG)/ntrials*100)
-print('Standard deviation:',np.std(s_deltaG_max))
-print('s of max deltaG:',s_truedeltaG_max)
-
-
-#Adiabatic Ground Potential 
-
-ZPEs=np.array(alldf['ZPE, VMC'])
-VMEP=np.array(alldf['Energies'])[0]
-VMEP=np.array(VMEP)
-vag_true=(VMEP-VMEP[0])*htokcal+ZPE_true
-fig, ax = plt.subplots(figsize=(8,12),dpi=200)
-vag=[]
-
-for i in range(ntrials):
-    vag.append(ZPEs[i]+(VMEP-VMEP[0])*htokcal)
-    #ax.plot(s_values,G_500K[i],linestyle='solid',lw=1.35)
-    ax.plot(s_values,ZPEs[i]+(VMEP-VMEP[0])*htokcal,linestyle='solid',lw=1.35)
-    if i==0:
-        #ax.legend(fontsize=20)
-        ax.set_xlabel('s',fontsize=25)
-        plt.xticks(fontsize=20)
-        plt.yticks(fontsize=20)
-        ax.set_ylabel('$V_a^G$ (kcal/mol)',fontsize=25)
-#        ax.set_title('C2H6_C6H5_noproj'+filename.split('_')[3])
-        #ax.grid()
+if mirror==False:
     
-ax.plot(s_values,(VMEP-VMEP[0])*htokcal+ZPE_true,linestyle='solid',color='black',lw=3)
-#ax.plot(s_values,G_100K_true,linestyle='solid',color='black',lw=3))
-ax.fill_between(s_values,vag_true-accuracy,vag_true+accuracy,color='grey',alpha=0.2)
+
+    s_values=np.array(s)
+
+    #1000 K
+    G_1000K=np.array(alldf['G, VMC, 1000K'])
+    G_1000K_true=G_true[-1]
+    deltaG_1000K=[]
+    deltaG_1000K_true=G_1000K_true-G_1000K_true[0]
+    fig, ax = plt.subplots(figsize=(8,12),dpi=200)
+
+    for i in range(ntrials):
+        deltaG_1000K.append(G_1000K[i]-G_1000K[i][0])
+        #ax.plot(s_values,G_1000K[i],linestyle='solid',lw=1.35)
+        ax.plot(s_values,G_1000K[i]-G_1000K[i][0],linestyle='solid',lw=1.35)
+        if i==0:
+            #ax.legend(fontsize=20)
+            ax.set_xlabel('s',fontsize=25)
+            plt.xticks(fontsize=20)
+            plt.yticks(fontsize=20)
+            ax.set_ylabel('$\Delta G_{vib,1000K}$ (kcal/mol)',fontsize=25)
+            #ax.set_title('C2H6_C6H5_noproj'+filename.split('_')[3])
+            #ax.grid()
 
 
-#MEP
-
-fig, ax = plt.subplots(figsize=(8,12),dpi=200)
-ax.plot(s_values,(VMEP-VMEP[0])*htokcal,linestyle='solid',color='black',lw=3)
-ax.set_xlabel('s',fontsize=25)
-plt.xticks(fontsize=20)
-plt.yticks(fontsize=20)
-ax.set_ylabel('$V_{MEP}$(kcal/mol)',fontsize=25)
-
-
-#ZPE
-fig, ax = plt.subplots(figsize=(8,12),dpi=200)
-
-
-for i in range(ntrials):
-
-    ax.plot(s_values,ZPEs[i],linestyle='solid',lw=1.35)
-    if i==0:
-        #ax.legend(fontsize=20)
-        ax.set_xlabel('s',fontsize=25)
-        plt.xticks(fontsize=20)
-        plt.yticks(fontsize=20)
-        ax.set_ylabel('ZPE (kcal/mol)',fontsize=25)
-#        ax.set_title('C2H6_C6H5_noproj'+filename.split('_')[3])
-        #ax.grid()
-    
-ax.plot(s_values,ZPE_true,linestyle='solid',color='black',lw=3)
-#ax.plot(s_values,G_100K_true,linestyle='solid',color='black',lw=3))
-ax.fill_between(s_values,ZPE_true-accuracy,ZPE_true+accuracy,color='grey',alpha=0.2)
+    #ax.set_xlim([-0.5,0.5]) 
+    #ax.set_ylim([-2.5,10]) 
+    ax.plot(s_values,G_1000K_true-G_1000K_true[0],linestyle='solid',color='black',lw=3)
+    #ax.plot(s_values,G_1000K_true,linestyle='solid',color='black',lw=3)
+    ax.fill_between(s_values,G_1000K_true-G_1000K_true[0]-accuracy,G_1000K_true-G_1000K_true[0]+accuracy,color='grey',alpha=0.2)
+    s_truedeltaG_max=s_values[(np.where(deltaG_1000K_true==max(deltaG_1000K_true)))[0][0]]
+    s_deltaG_max=[]
+    count_s_deltaG=0
+    for i in range(ntrials):
+        s_max_trial=s_values[(np.where(deltaG_1000K[i]==max(deltaG_1000K[i])))[0][0]]
+        s_deltaG_max.append(s_max_trial)
+        if  s_max_trial==s_truedeltaG_max:
+            continue
+        count_s_deltaG+=1
+    print('Percentage of trials that have the same deltaG peak:',(ntrials-count_s_deltaG)/ntrials*100)
+    print('Standard deviation:',np.std(s_deltaG_max))
+    print('s of max deltaG:',s_truedeltaG_max)
 
 
-s_truevag_max=s_values[(np.where(vag_true==max(vag_true)))[0][0]]
-s_vag_max=[]
-count_s=0
-for i in range(ntrials):
-    s_max_trial=s_values[(np.where(vag[i]==max(vag[i])))[0][0]]
-    s_vag_max.append(s_max_trial)
-    if  s_max_trial==s_truevag_max:
-        continue
-    count_s+=1
-print('\nPercentage of trials that have the same VaG peak:',(ntrials-count_s)/ntrials*100)
-print('Standard deviation:',np.std(s_vag_max))
-print('s of max VaG',s_truevag_max)
+    #Adiabatic Ground Potential 
+
+    ZPEs=np.array(alldf['ZPE, VMC'])
+    VMEP=np.array(alldf['Energies'])[0]
+    VMEP=np.array(VMEP)
+    vag_true=(VMEP-VMEP[0])*htokcal+ZPE_true
+    fig, ax = plt.subplots(figsize=(8,12),dpi=200)
+    vag=[]
+
+    for i in range(ntrials):
+        vag.append(ZPEs[i]+(VMEP-VMEP[0])*htokcal)
+        #ax.plot(s_values,G_500K[i],linestyle='solid',lw=1.35)
+        ax.plot(s_values,ZPEs[i]+(VMEP-VMEP[0])*htokcal,linestyle='solid',lw=1.35)
+        if i==0:
+            #ax.legend(fontsize=20)
+            ax.set_xlabel('s',fontsize=25)
+            plt.xticks(fontsize=20)
+            plt.yticks(fontsize=20)
+            ax.set_ylabel('$V_a^G$ (kcal/mol)',fontsize=25)
+    #        ax.set_title('C2H6_C6H5_noproj'+filename.split('_')[3])
+            #ax.grid()
+
+    ax.plot(s_values,(VMEP-VMEP[0])*htokcal+ZPE_true,linestyle='solid',color='black',lw=3)
+    #ax.plot(s_values,G_100K_true,linestyle='solid',color='black',lw=3))
+    ax.fill_between(s_values,vag_true-accuracy,vag_true+accuracy,color='grey',alpha=0.2)
+
+
+    #MEP
+
+    fig, ax = plt.subplots(figsize=(8,12),dpi=200)
+    ax.plot(s_values,(VMEP-VMEP[0])*htokcal,linestyle='solid',color='black',lw=3)
+    ax.set_xlabel('s',fontsize=25)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    ax.set_ylabel('$V_{MEP}$(kcal/mol)',fontsize=25)
+
+
+    #ZPE
+    fig, ax = plt.subplots(figsize=(8,12),dpi=200)
+
+
+    for i in range(ntrials):
+
+        ax.plot(s_values,ZPEs[i],linestyle='solid',lw=1.35)
+        if i==0:
+            #ax.legend(fontsize=20)
+            ax.set_xlabel('s',fontsize=25)
+            plt.xticks(fontsize=20)
+            plt.yticks(fontsize=20)
+            ax.set_ylabel('ZPE (kcal/mol)',fontsize=25)
+    #        ax.set_title('C2H6_C6H5_noproj'+filename.split('_')[3])
+            #ax.grid()
+
+    ax.plot(s_values,ZPE_true,linestyle='solid',color='black',lw=3)
+    #ax.plot(s_values,G_100K_true,linestyle='solid',color='black',lw=3))
+    ax.fill_between(s_values,ZPE_true-accuracy,ZPE_true+accuracy,color='grey',alpha=0.2)
+
+
+    s_truevag_max=s_values[(np.where(vag_true==max(vag_true)))[0][0]]
+    s_vag_max=[]
+    count_s=0
+    for i in range(ntrials):
+        s_max_trial=s_values[(np.where(vag[i]==max(vag[i])))[0][0]]
+        s_vag_max.append(s_max_trial)
+        if  s_max_trial==s_truevag_max:
+            continue
+        count_s+=1
+    print('\nPercentage of trials that have the same VaG peak:',(ntrials-count_s)/ntrials*100)
+    print('Standard deviation:',np.std(s_vag_max))
+    print('s of max VaG',s_truevag_max)
