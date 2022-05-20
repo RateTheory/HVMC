@@ -19,7 +19,7 @@ authors:
   orcid: "https://orcid.org/0000-0001-6007-1300"
 - given-names: "Urbashi"
   family-names: "Mitra"
-  affiliation:"Ming Hsieh Department of Electrical and Computer Engineering"
+  affiliation: "Ming Hsieh Department of Electrical and Computer Engineering"
   orcid: "https://orcid.org/0000-0002-8896-1177"
 - given-names: "Shaama"
   family-names: "Mallikarjun Sharada"
@@ -27,9 +27,9 @@ authors:
   email: "ssharada@usc.edu"
   affiliation: "Mork Family Department of Chemical Engineering and Materials Science; Department of Chemistry"
   
-title: "HVMC"
+title: HVMC
 version: 1.0.0
-doi: "10.5281/zenodo.1234"
+doi: 10.5281/zenodo.1234
 date-released: "2022-05-18"
 url: "https://github.com/RateTheory/HVMC"
 type: "software"
