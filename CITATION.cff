@@ -38,23 +38,10 @@ authors:
   affiliation: >-
       Mork Family Department of Chemical Engineering
       and Materials Science; Chemistry
-  
-title: "HVMC"
-version: 1.0.0
-doi: 10.5281/zenodo.1234
-date-released: 2022-05-18
+
+title: "A matrix completion algorithm for efficient calculation of quantum and variational effects in chemical reactions"
+doi: 10.1063/5.0091155
+
 url: "https://github.com/RateTheory/HVMC"
-type: software
 
-
-@article{bac2022matrix,
-  title={{A matrix completion algorithm for efficient calculation of quantum and variational effects in chemical reactions}},
-  author={Bac, Selin and Quiton, Stephen Jon Du and Kron, Kareesa J and Chae, Jeongmin and Mitra, Urbashi and Mallikarjun Sharada, Shaama},
-  doi = {10.1063/5.0091155}
-  journal={The Journal of Chemical Physics},
-  year={2022},
-  volume={156},
-  pages={184119},
-  publisher={AIP Publishing LLC}
-}
 
