@@ -1,47 +1,35 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: Bac
-  given-names: Selin 
-  affiliation: >-
-      Mork Family Department of Chemical Engineering
-      and Materials Science
+- family-names: "Bac"
+  given-names: "Selin" 
+  affiliation: "Mork Family Department of Chemical Engineering and Materials Science"
   orcid: "https://orcid.org/0000-0002-4258-4265"
-- given-names: Stephen Jon
-  family-names: Quiton
-  affiliation: >-
-      Mork Family Department of Chemical Engineering
-      and Materials Science
+- given-names: "Stephen Jon"
+  family-names: "Quiton"
+  affiliation: "Mork Family Department of Chemical Engineering and Materials Science"
   orcid: "https://orcid.org/0000-0002-7623-2583"
-- given-names: Kareesa
-  family-names: Kron
-  affiliation: >-
-      Mork Family Department of Chemical Engineering
-      and Materials Science
-  orcid:"https://orcid.org/0000-0001-9057-6211"
-- given-names: Jeongmin
-  family-names: Chae
-  affiliation: >-
-      Ming Hsieh Department of Electrical and
-      Computer Engineering
-  orcid:"https://orcid.org/0000-0001-6007-1300"
-- given-names: Urbashi
-  family-names: Mitra
-  affiliation: >-
-      Ming Hsieh Department of Electrical and
-      Computer Engineering
-  orcid:"https://orcid.org/0000-0002-8896-1177"
-- given-names: Shaama
-  family-names: Mallikarjun Sharada
-  orcid:"https://orcid.org/0000-0001-7332-5373"
-  email: ssharada@usc.edu
-  affiliation: >-
-      Mork Family Department of Chemical Engineering
-      and Materials Science; Chemistry
+- given-names: "Kareesa"
+  family-names: "Kron"
+  affiliation: "Mork Family Department of Chemical Engineering and Materials Science"
+  orcid: "https://orcid.org/0000-0001-9057-6211"
+- given-names: "Jeongmin"
+  family-names: "Chae"
+  affiliation: "Ming Hsieh Department of Electrical and Computer Engineering"
+  orcid: "https://orcid.org/0000-0001-6007-1300"
+- given-names: "Urbashi"
+  family-names: "Mitra"
+  affiliation:"Ming Hsieh Department of Electrical and Computer Engineering"
+  orcid: "https://orcid.org/0000-0002-8896-1177"
+- given-names: "Shaama"
+  family-names: "Mallikarjun Sharada"
+  orcid: "https://orcid.org/0000-0001-7332-5373"
+  email: "ssharada@usc.edu"
+  affiliation: "Mork Family Department of Chemical Engineering and Materials Science; Department of Chemistry"
   
 title: "HVMC"
 version: 1.0.0
-doi: 10.5281/zenodo.1234
-date-released: 2022-05-18
+doi: "10.5281/zenodo.1234"
+date-released: "2022-05-18"
 url: "https://github.com/RateTheory/HVMC"
-type: software
+type: "software"
