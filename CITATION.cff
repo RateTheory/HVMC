@@ -48,7 +48,7 @@ type: software
 
 
 @article{bac2022matrix,
-  title={A matrix completion algorithm for efficient calculation of quantum and variational effects in chemical reactions},
+  title={{A matrix completion algorithm for efficient calculation of quantum and variational effects in chemical reactions}},
   author={Bac, Selin and Quiton, Stephen Jon Du and Kron, Kareesa J and Chae, Jeongmin and Mitra, Urbashi and Mallikarjun Sharada, Shaama},
   doi = {10.1063/5.0091155}
   journal={The Journal of Chemical Physics},
