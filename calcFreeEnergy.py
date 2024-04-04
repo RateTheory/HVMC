@@ -103,7 +103,6 @@ def free_energy(E,H,S,T):
 
 def au_to_wvno(eigval): 
     #converts from atomic units to wavenumbers
-    #copying formula from qchem trunk for now
     tocm = 5.89141e-7
     tocm2 = 3.94562
     if eigval>0.:
